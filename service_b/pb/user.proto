@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package pb;
+
+service User {
+  rpc GetAvatar(GetAvatarRequest) returns (GetAvatarReply) {}
+}
+
+message GetAvatarRequest {
+  string username = 1;
+}
+
+message GetAvatarReply {
+  string avatar = 2;
+}
+
+
