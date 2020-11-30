@@ -11,7 +11,7 @@ message GetAvatarRequest {
 }
 
 message GetAvatarReply {
-  string avatar = 2;
+  string avatar = 1;
 }
 
 

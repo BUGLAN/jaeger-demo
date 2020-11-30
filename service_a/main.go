@@ -70,6 +70,10 @@ func getUseClient() pb.UserClient {
 }
 
 func getAvatar(c *gin.Context) {
+	tracer := opentracing.GlobalTracer()
+	span, _ := opentracing.StartSpanFromContextWithTracer(c, tracer, "geta")
+	span.SetTag("a", "b")
+	defer span.Finish()
 	client := getUseClient()
 	username := c.Query("username")
 	if username == "" {

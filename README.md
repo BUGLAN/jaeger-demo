@@ -97,6 +97,6 @@ func main() {
 ### 全链路追踪
 
 
-* user_a 服务为http层, 为接口层
-* b 服务为grpc层, 为逻辑层
-* c 服务为数据操纵层, 为数据库层
+* service_a 服务为http层, 为接口层
+* service_b 服务为grpc层, 为逻辑层
+* service_c 服务为数据操纵层, 为数据库层

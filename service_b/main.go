@@ -9,6 +9,7 @@ import (
 	"io"
 	"jaeger-demo/service_b/pb"
 	"jaeger-demo/service_b/service"
+	cpb "jaeger-demo/service_c/pb"
 	"net"
 )
 
@@ -34,8 +35,17 @@ func main() {
 		panic(err)
 
 	}
+	conn, err := grpc.Dial("127.0.0.1:5003", grpc.WithInsecure(), grpc.WithUnaryInterceptor(
+		otgrpc.OpenTracingClientInterceptor(tracer)),
+		grpc.WithStreamInterceptor(
+			otgrpc.OpenTracingStreamClientInterceptor(tracer)))
 
-	userService := service.NewUser()
+	if err != nil {
+		panic(err)
+	}
+	client := cpb.NewAvatarClient(conn)
+
+	userService := service.NewUser(client)
 	s := grpc.NewServer(
 		grpc.UnaryInterceptor(
 			otgrpc.OpenTracingServerInterceptor(tracer)),
